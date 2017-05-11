@@ -39,10 +39,10 @@ def processRequest(req):
     res = 0
     if req.get("result").get("action") == "help.emotion.info":
         query = sentimentAnalysis(req)
-        if score < 0.2:
-            res = makeEmotionSadWebhookResult()
-        else:
-            res = makeEmotionHappyWebhookResult()
+        #if score < 0.2:
+           # res = makeEmotionSadWebhookResult()
+        #else:
+            #res = makeEmotionHappyWebhookResult()
     elif req.get("result").get("action") == "help.learning.info":
         res = makeLearningWebhookResult()
       
