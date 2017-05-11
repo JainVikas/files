@@ -41,26 +41,20 @@ def processRequest(req):
         result = req.get("result")
         parameters = result.get("parameters")
         query = parameters.get("any")
-        sentiment = TextBlob(query)
-        score = sentiment.polarity
-        #if score < 0.2:
-           # res = makeEmotionSadWebhookResult()
-        #else:
-            #res = makeEmotionHappyWebhookResult()
+        if score < -0.3:
+            res = makeEmotionSadWebhookResult()
+        else:
+            res = makeEmotionHappyWebhookResult()
     elif req.get("result").get("action") == "help.learning.info":
         res = makeLearningWebhookResult()
       
-    return {
-        "speech": score,
-        "displayText": score,
-        # "data": data,
-        # "contextOut": [],
-    }
+    return res
 
 
 def sentimentAnalysis(query):
-    analysis = TextBlob(query)
-    return query
+    sentiment = TextBlob(query)
+    score = sentiment.polarity
+    return score
 
 def learningRecomendation(req):
     query =  req.get("result").get("parameters").get("skills")
