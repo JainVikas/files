@@ -42,10 +42,10 @@ def processRequest(req):
             res = makeEmotionSadWebhookResult()
         else:
             res = makeEmotionHappyWebhookResult()
-   # elif req.get("result").get("action") == "help.learning.info":
-    # { score = learningRecomendation(req)
-     #   res = makeLearningWebhookResult()
-      # }
+    elif req.get("result").get("action") == "help.learning.info":
+     { #score = learningRecomendation(req)
+       res = makeLearningWebhookResult()
+      }
     return res
 
 
@@ -57,7 +57,7 @@ def sentimentAnalysis(req):
         score = response.read()
         obj = json.loads(the_page)
         senti = obj.get("probability")
-        score = senti.get("pos")
+        score = float(senti.get("pos"))
     return score
 
 def learningRecomendation(req):
