@@ -36,13 +36,13 @@ def webhook():
 
 
 def processRequest(req):
+    res = 0
     if req.get("result").get("action") == "help.emotion.info":
         res = makeEmotionWebhookResult()
-          
-   # elif req.get("result").get("action") == "help.emotion.info":
-       # { score = learningRecomendation(req)
-      #    res = makeLearningWebhookResult()
-       #   }
+   # elif req.get("result").get("action") == "help.learning.info":
+    # { score = learningRecomendation(req)
+     #   res = makeLearningWebhookResult()
+      # }
     return res
 
 
@@ -76,7 +76,6 @@ def makeEmotionWebhookResult():
         "displayText": speech,
         # "data": data,
         # "contextOut": [],
-        "source": "apiai-weather-webhook-sample"
     }
 def makeLearningWebhookResult():
     
@@ -90,7 +89,6 @@ def makeLearningWebhookResult():
         "displayText": speech,
         # "data": data,
         # "contextOut": [],
-        "source": "apiai-weather-webhook-sample"
     }
 
 
