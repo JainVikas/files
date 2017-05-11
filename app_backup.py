@@ -44,10 +44,10 @@ def processRequest(req):
         query = parameters.get("any")
         file = open("testfile.txt", "w")
         file.write(query)
-        #file.close()
+        file.close()
         file = open("testfile.txt", "r")
         query = file.read()
-        #data = sentimentAnalysis(query)
+        data = sentimentAnalysis(query)
         #if score < 0.2:
            # res = makeEmotionSadWebhookResult()
         #else:
