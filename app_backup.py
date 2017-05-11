@@ -11,13 +11,16 @@ import json
 import os
 from textblob import TextBlob
 
-from flask import Flask
+from flask import Flask, render_template
 from flask import request
 from flask import make_response
 
 # Flask app should start in global layout
 app = Flask(__name__)
 
+@app.route('/')
+def hello():
+    return render_template('index.htm')
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
