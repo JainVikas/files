@@ -29,7 +29,7 @@ def webhook():
     res = processRequest(req)
 
     res = json.dumps(res, indent=4)
-    # print(res)
+    print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
@@ -73,8 +73,8 @@ def makeEmotionWebhookResult():
     print(speech)
 
     return {
-        "speech": speech,
-        "displayText": speech,
+        "speech": webhook,
+        "displayText": webhook,
         # "data": data,
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
