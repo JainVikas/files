@@ -51,10 +51,10 @@ def sentimentAnalysis(req):
     data = urllib.parse.urlencode({"text": query }).encode("utf-8")
     req = urllib.request.Request("http://text-processing.com/api/sentiment/", data)
     with urllib.request.urlopen(req) as response:
-    score = response.read()
-    obj = json.loads(the_page)
-    senti = obj.get("probability")
-    print(senti.get("pos")) 
+        score = response.read()
+        obj = json.loads(the_page)
+        senti = obj.get("probability")
+        print(senti.get("pos")) 
     return score
 
 def learningRecomendation(req):
