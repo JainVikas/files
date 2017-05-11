@@ -42,7 +42,7 @@ def processRequest(req):
         parameters = result.get("parameters")
         query = parameters.get("any")
         #query = 'text required'
-        sentimentAnalysis(query)
+        #sentimentAnalysis(query)
         #if score < 0.2:
            # res = makeEmotionSadWebhookResult()
         #else:
@@ -59,8 +59,7 @@ def processRequest(req):
 
 
 def sentimentAnalysis(query):
-    
-    data = urllib.parse.urlencode({"text": query }).encode("utf-8")
+        data = urllib.parse.urlencode({"text": query }).encode("utf-8")
     req = urllib.request.Request("http://text-processing.com/api/sentiment/", data)
     with urllib.request.urlopen(req) as response:
         score = response.read()
