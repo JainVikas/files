@@ -7,10 +7,10 @@ import urllib
 from urllib.parse import urlparse, urlencode
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
-import urllib.parse
-import urllib.request
+import base64
 import json
 import os
+from textblob import TextBlob
 
 from flask import Flask
 from flask import request
@@ -64,14 +64,9 @@ def processRequest(req):
 
 
 def sentimentAnalysis(query):
-    data = urlencode({"text": "not happy with result" }).encode('utf-8')
-    #req = Request("http://text-processing.com/api/sentiment/", data)
-   # with urlopen(req) as response:
-        #score = response.read()
-        #obj = json.loads(the_page)
-        #senti = obj.get("probability")
-        #score = float(senti.get("pos"))
-    return data
+    analysis = TextBlob(query)
+    
+    return query
 
 def learningRecomendation(req):
     query =  req.get("result").get("parameters").get("skills")
