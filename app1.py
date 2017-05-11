@@ -38,7 +38,7 @@ def webhook():
 def processRequest(req):
     res = 0
     if req.get("result").get("action") == "help.emotion.info":
-        score = 0.1
+        score = sentimentAnalysis(req)
         if score < 0.2:
             res = makeEmotionSadWebhookResult()
         else:
@@ -46,12 +46,17 @@ def processRequest(req):
     elif req.get("result").get("action") == "help.learning.info":
         res = makeLearningWebhookResult()
       
-    return res
+    return {
+        "speech": score,
+        "displayText": score,
+        # "data": data,
+        # "contextOut": [],
+    }
 
 
 def sentimentAnalysis(req):
     query =  req.get("result").get("resolvedQuery")
-    data = urllib.parse.urlencode({"text": query }).encode("utf-8")
+    data = urllib.parse.urlencode({"text": "i am happy" }).encode("utf-8")
     req = urllib.request.Request("http://text-processing.com/api/sentiment/", data)
     with urllib.request.urlopen(req) as response:
         score = response.read()
