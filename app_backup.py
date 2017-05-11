@@ -64,9 +64,9 @@ def processRequest(req):
 
 
 def sentimentAnalysis(query):
-    data = urllib.parse.urlencode({"text": "not happy with result" }).encode('utf-8')
-    #req = urllib.request.Request("http://text-processing.com/api/sentiment/", data)
-   # with urllib.request.urlopen(req) as response:
+    data = urlencode({"text": "not happy with result" }).encode('utf-8')
+    #req = Request("http://text-processing.com/api/sentiment/", data)
+   # with urlopen(req) as response:
         #score = response.read()
         #obj = json.loads(the_page)
         #senti = obj.get("probability")
