@@ -7,7 +7,8 @@ import urllib
 from urllib.parse import urlparse, urlencode
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
-
+import urllib.parse
+import urllib.request
 import json
 import os
 
