@@ -42,7 +42,7 @@ def processRequest(req):
         parameters = result.get("parameters")
         query = parameters.get("any")
         #query = 'text required'
-        #sentimentAnalysis(query)
+        data = sentimentAnalysis(query)
         #if score < 0.2:
            # res = makeEmotionSadWebhookResult()
         #else:
@@ -51,8 +51,8 @@ def processRequest(req):
         res = makeLearningWebhookResult()
       
     return {
-        "speech": query,
-        "displayText": query,
+        "speech": data,
+        "displayText": data,
         # "data": data,
         # "contextOut": [],
     }
@@ -66,7 +66,7 @@ def sentimentAnalysis(query):
         obj = json.loads(the_page)
         senti = obj.get("probability")
         score = float(senti.get("pos"))
-    return query
+    return data
 
 def learningRecomendation(req):
     query =  req.get("result").get("parameters").get("skills")
