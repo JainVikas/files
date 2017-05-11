@@ -40,7 +40,7 @@ def processRequest(req):
     if req.get("result").get("action") == "help.emotion.info":
         if score < 0.2:
             res = makeEmotionSadWebhookResult()
-        else
+        else:
             res = makeEmotionHappyWebhookResult()
    # elif req.get("result").get("action") == "help.learning.info":
     # { score = learningRecomendation(req)
