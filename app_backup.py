@@ -41,6 +41,7 @@ def processRequest(req):
         result = req.get("result")
         parameters = result.get("parameters")
         query = parameters.get("any")
+        score = sentimentAnalysis(query)
         if score < -0.3:
             res = makeEmotionSadWebhookResult()
         else:
