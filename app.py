@@ -25,25 +25,26 @@ def webhook():
 
     print("Request:")
     print(json.dumps(req, indent=4))
+    speech = "learning Webhook result"
 
-    #res = processRequest(req)
-
-    #res = json.dumps(res, indent=4)
-   # print(res)
-    #r = make_response(res)
-   # r.headers['Content-Type'] = 'application/json'
-   speech = "Webhook result: I understand this, let look at this video. It will help you. https://www.youtube.com/watch?v=LrhSJ1FHeaA"
     print("Response:")
     print(speech)
+    print("hello from heroku")
 
-    return {
-        "speech": webhook,
-        "displayText": webhook,
+    res =  {
+        "speech": speech,
+        "displayText": speech,
         # "data": data,
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
         }
-    #return r
+   # res = processRequest(req)
+
+    res = json.dumps(res, indent=4)
+    print(res)
+    r = make_response(res)
+    r.headers['Content-Type'] = 'application/json'
+    return r
 
 
 def processRequest(req):
