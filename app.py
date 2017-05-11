@@ -55,7 +55,7 @@ def processRequest(req):
    # elif req.get("result").get("action") == "help.learning.info":
     # { score = learningRecomendation(req)
      #   res = makeLearningWebhookResult()
-       }
+       #}
     return res
 
 
