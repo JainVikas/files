@@ -26,13 +26,24 @@ def webhook():
     print("Request:")
     print(json.dumps(req, indent=4))
 
-    res = processRequest(req)
+    #res = processRequest(req)
 
-    res = json.dumps(res, indent=4)
-    print(res)
-    r = make_response(res)
-    r.headers['Content-Type'] = 'application/json'
-    return r
+    #res = json.dumps(res, indent=4)
+   # print(res)
+    #r = make_response(res)
+   # r.headers['Content-Type'] = 'application/json'
+   speech = "Webhook result: I understand this, let look at this video. It will help you. https://www.youtube.com/watch?v=LrhSJ1FHeaA"
+    print("Response:")
+    print(speech)
+
+    return {
+        "speech": webhook,
+        "displayText": webhook,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+        }
+    #return r
 
 
 def processRequest(req):
