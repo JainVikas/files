@@ -43,9 +43,8 @@ def processRequest(req):
         else:
             res = makeEmotionHappyWebhookResult()
     elif req.get("result").get("action") == "help.learning.info":
-     { #score = learningRecomendation(req)
-       res = makeLearningWebhookResult()
-      }
+        res = makeLearningWebhookResult()
+      
     return res
 
 
