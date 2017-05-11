@@ -3,7 +3,6 @@
 from __future__ import print_function
 from future.standard_library import install_aliases
 install_aliases()
-import urllib
 from urllib.parse import urlparse, urlencode
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
@@ -42,12 +41,7 @@ def processRequest(req):
         result = req.get("result")
         parameters = result.get("parameters")
         query = parameters.get("any")
-        file = open("testfile.txt", "w")
-        file.write(query)
-        file.close()
-        file = open("testfile.txt", "r")
-        query = file.read()
-        data = sentimentAnalysis(query)
+        data = TextBlob(query)
         #if score < 0.2:
            # res = makeEmotionSadWebhookResult()
         #else:
@@ -65,7 +59,6 @@ def processRequest(req):
 
 def sentimentAnalysis(query):
     analysis = TextBlob(query)
-    
     return query
 
 def learningRecomendation(req):
