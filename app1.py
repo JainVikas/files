@@ -25,23 +25,11 @@ def webhook():
 
     print("Request:")
     print(json.dumps(req, indent=4))
-    speech = "hello from heroku"
 
-    print("Response:")
-    print(speech)
-    print("hello from heroku")
-
-    res =  {
-        "speech": speech,
-        "displayText": speech,
-        # "data": data,
-        # "contextOut": [],
-        "source": "apiai-weather-webhook-sample"
-        }
-   # res = processRequest(req)
+    res = processRequest(req)
 
     res = json.dumps(res, indent=4)
-    print(res)
+    # print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
@@ -49,13 +37,12 @@ def webhook():
 
 def processRequest(req):
     res = 0
-    if req.get("result").get("action") != "help.emotion.info":
-        return{}
-    res = makeEmotionWebhookResult()
+    if req.get("result").get("action") == "help.emotion.info":
+        res = makeEmotionWebhookResult()
    # elif req.get("result").get("action") == "help.learning.info":
     # { score = learningRecomendation(req)
      #   res = makeLearningWebhookResult()
-       #}
+      # }
     return res
 
 
@@ -64,10 +51,10 @@ def sentimentAnalysis(req):
     data = urllib.parse.urlencode({"text": query }).encode("utf-8")
     req = urllib.request.Request("http://text-processing.com/api/sentiment/", data)
     with urllib.request.urlopen(req) as response:
-        score = response.read()
-        obj = json.loads(the_page)
-        senti = obj.get("probability")
-        print(senti.get("pos")) 
+    score = response.read()
+    obj = json.loads(the_page)
+    senti = obj.get("probability")
+    print(senti.get("pos")) 
     return score
 
 def learningRecomendation(req):
@@ -78,17 +65,18 @@ def learningRecomendation(req):
 
 
 def makeEmotionWebhookResult():
+    
     speech = "Webhook result: I understand this, let look at this video. It will help you. https://www.youtube.com/watch?v=LrhSJ1FHeaA"
+
     print("Response:")
     print(speech)
 
     return {
-        "speech": webhook,
-        "displayText": webhook,
+        "speech": speech,
+        "displayText": speech,
         # "data": data,
         # "contextOut": [],
-        "source": "apiai-weather-webhook-sample"
-        }
+    }
 def makeLearningWebhookResult():
     
     speech = "learning Webhook result"
@@ -101,8 +89,7 @@ def makeLearningWebhookResult():
         "displayText": speech,
         # "data": data,
         # "contextOut": [],
-        "source": "apiai-weather-webhook-sample"
-        }
+    }
 
 
 if __name__ == '__main__':
