@@ -66,9 +66,7 @@ def learningRecomendation(req):
 
 
 def makeEmotionWebhookResult():
-    
     speech = "Webhook result: I understand this, let look at this video. It will help you. https://www.youtube.com/watch?v=LrhSJ1FHeaA"
-
     print("Response:")
     print(speech)
 
@@ -78,7 +76,7 @@ def makeEmotionWebhookResult():
         # "data": data,
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
-    }
+        }
 def makeLearningWebhookResult():
     
     speech = "learning Webhook result"
@@ -92,7 +90,7 @@ def makeLearningWebhookResult():
         # "data": data,
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
-    }
+        }
 
 
 if __name__ == '__main__':
