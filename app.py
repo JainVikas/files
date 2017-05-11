@@ -36,12 +36,14 @@ def webhook():
 
 
 def processRequest(req):
-    if req.get("result").get("action") == "help.emotion.info":
-        res = makeEmotionWebhookResult()
+    res = 0
+    if req.get("result").get("action") != "help.emotion.info":
+        return{}
+    res = makeEmotionWebhookResult()
    # elif req.get("result").get("action") == "help.learning.info":
     # { score = learningRecomendation(req)
      #   res = makeLearningWebhookResult()
-      # }
+       }
     return res
 
 
