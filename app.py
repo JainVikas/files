@@ -36,56 +36,51 @@ def webhook():
 
 
 def processRequest(req):
-    if req.get("result").get("action") != "yahooWeatherForecast":
-        return {}
-    baseurl = "https://query.yahooapis.com/v1/public/yql?"
-    yql_query = makeYqlQuery(req)
-    if yql_query is None:
-        return {}
-    yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
-    result = urlopen(yql_url).read()
-    data = json.loads(result)
-    res = makeWebhookResult(data)
+    if req.get("result").get("action") == "help.emotion.info":
+        res = makeEmotionWebhookResult()
+          
+   # elif req.get("result").get("action") == "help.emotion.info":
+       # { score = learningRecomendation(req)
+      #    res = makeLearningWebhookResult()
+       #   }
     return res
 
 
-def makeYqlQuery(req):
-    result = req.get("result")
-    parameters = result.get("parameters")
-    city = parameters.get("geo-city")
-    if city is None:
-        return None
+def sentimentAnalysis(req):
+    query =  req.get("result").get("resolvedQuery")
+    data = urllib.parse.urlencode({"text": query }).encode("utf-8")
+    req = urllib.request.Request("http://text-processing.com/api/sentiment/", data)
+    with urllib.request.urlopen(req) as response:
+    score = response.read()
+    obj = json.loads(the_page)
+    senti = obj.get("probability")
+    print(senti.get("pos")) 
+    return score
 
-    return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
+def learningRecomendation(req):
+    query =  req.get("result").get("parameters").get("skills")
+    #function for learning recomendation and response back with details
 
 
-def makeWebhookResult(data):
-    query = data.get('query')
-    if query is None:
-        return {}
 
-    result = query.get('results')
-    if result is None:
-        return {}
 
-    channel = result.get('channel')
-    if channel is None:
-        return {}
+def makeEmotionWebhookResult():
+    
+    speech = "Webhook result: I understand this, let look at this video. It will help you. https://www.youtube.com/watch?v=LrhSJ1FHeaA"
 
-    item = channel.get('item')
-    location = channel.get('location')
-    units = channel.get('units')
-    if (location is None) or (item is None) or (units is None):
-        return {}
+    print("Response:")
+    print(speech)
 
-    condition = item.get('condition')
-    if condition is None:
-        return {}
-
-    # print(json.dumps(item, indent=4))
-
-    speech = "Today in " + location.get('city') + ": " + condition.get('text') + \
-             ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
+    return {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+    }
+def makeLearningWebhookResult():
+    
+    speech = "learning Webhook result"
 
     print("Response:")
     print(speech)
