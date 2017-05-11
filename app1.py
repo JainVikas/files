@@ -38,7 +38,7 @@ def webhook():
 def processRequest(req):
     res = 0
     if req.get("result").get("action") == "help.emotion.info":
-        score = sentimentAnalysis(req)
+        score = 0.1
         if score < 0.2:
             res = makeEmotionSadWebhookResult()
         else:
