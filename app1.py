@@ -42,7 +42,11 @@ def processRequest(req):
         result = req.get("result")
         parameters = result.get("parameters")
         query = parameters.get("any")
-        data = sentimentAnalysis(query)
+        file = open("testfile.txt", "w")
+        file.write(query)
+        file.close()
+
+        #data = sentimentAnalysis(query)
         #if score < 0.2:
            # res = makeEmotionSadWebhookResult()
         #else:
@@ -51,8 +55,8 @@ def processRequest(req):
         res = makeLearningWebhookResult()
       
     return {
-        "speech": data,
-        "displayText": data,
+        "speech": query,
+        "displayText": query,
         # "data": data,
         # "contextOut": [],
     }
