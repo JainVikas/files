@@ -38,7 +38,10 @@ def webhook():
 def processRequest(req):
     res = 0
     if req.get("result").get("action") == "help.emotion.info":
-        res = makeEmotionWebhookResult()
+        if score<0.2
+            res = makeEmotionSadWebhookResult()
+        else
+            res = makeEmotionHappyWebhookResult()
    # elif req.get("result").get("action") == "help.learning.info":
     # { score = learningRecomendation(req)
      #   res = makeLearningWebhookResult()
@@ -54,7 +57,7 @@ def sentimentAnalysis(req):
         score = response.read()
         obj = json.loads(the_page)
         senti = obj.get("probability")
-        print(senti.get("pos")) 
+        score = senti.get("pos")
     return score
 
 def learningRecomendation(req):
@@ -64,9 +67,22 @@ def learningRecomendation(req):
 
 
 
-def makeEmotionWebhookResult():
+def makeEmotionSadWebhookResult():
     
     speech = "Webhook result: I understand this, let look at this video. It will help you. https://www.youtube.com/watch?v=LrhSJ1FHeaA"
+
+    print("Response:")
+    print(speech)
+
+    return {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+    }
+def makeEmotionHappyWebhookResult():
+    
+    speech = "Webhook result: Glad to know that you are happy."
 
     print("Response:")
     print(speech)
