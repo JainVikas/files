@@ -48,18 +48,9 @@ def processRequest(req):
         else:
             res = makeEmotionHappyWebhookResult()
     elif req.get("result").get("action") == "help.learning.info":
-        res = makeLearningWebhookResult()
-    else:
-        request = Request('http://placekitten.com/')
-        response = urlopen(request)
-        kittens = response.read()
-        res = kittens[559]  
-    return {
-        "speech": res,
-        "displayText": res,
-        # "data": data,
-        # "contextOut": [],
-    }
+        res = makeLearningWebhookResult(req)
+    
+    return res
 
 
 
@@ -74,8 +65,7 @@ def learningRecomendation(req):
     userid =  req.get("result").get("parameters").get("userid")
     #function for learning recomendation and response back with details
 
-
-
+    return skills
 
 def makeEmotionSadWebhookResult():
     
@@ -104,9 +94,9 @@ def makeEmotionHappyWebhookResult():
         # "contextOut": [],
     }
 
-def makeLearningWebhookResult():
+def makeLearningWebhookResult(req):
     
-    speech = "learning Webhook result"
+    speech = learningRecomendation(req)
 
     print("Response:")
     print(speech)
