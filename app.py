@@ -48,7 +48,11 @@ def processRequest(req):
         else:
             res = makeEmotionHappyWebhookResult()
     elif req.get("result").get("action") == "help.learning.info":
-        res = makeLearningWebhookResult(req)
+        skills =  req.get("result").get("parameters").get("skills")
+        education =  req.get("result").get("parameters").get("education")
+        userid =  req.get("result").get("parameters").get("userid")
+        if skills is not None and education is not None and userid is not None :
+            res = makeLearningWebhookResult(skills, education, userid)
     
     return res
 
@@ -59,12 +63,8 @@ def sentimentAnalysis(query):
     score = sentiment.polarity
     return score
 
-def learningRecomendation(req):
-    skills =  req.get("result").get("parameters").get("skills")
-    education =  req.get("result").get("parameters").get("education")
-    userid =  req.get("result").get("parameters").get("userid")
-    #function for learning recomendation and response back with details
-
+def learningRecomendation(skills, education, userid):
+    
     return skills
 
 def makeEmotionSadWebhookResult():
@@ -94,9 +94,10 @@ def makeEmotionHappyWebhookResult():
         # "contextOut": [],
     }
 
-def makeLearningWebhookResult(req):
+def makeLearningWebhookResult(skills, education, userid):
     
-    speech = learningRecomendation(req)
+    speech = skiils
+    #learningRecomendation(skills, education, userid)
 
     print("Response:")
     print(speech)
