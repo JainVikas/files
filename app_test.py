@@ -54,7 +54,7 @@ def processRequest(req):
         #education = parameters.get("education")
         userid = parameters.get("userid")
         if userid is not None:
-			res = makeLearningWebhookResult(userid)
+		res = makeLearningWebhookResult(userid)
     return res
 
 def sentimentAnalysis(query):
