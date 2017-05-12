@@ -18,10 +18,6 @@ from flask import make_response
 # Flask app should start in global layout
 app = Flask(__name__)
 
-@app.route('/')
-def hello():
-    return render_template('index.htm')
-
 @app.route('/webhook', methods=['POST'])
 def webhook():
     req = request.get_json(silent=True, force=True)
@@ -51,21 +47,33 @@ def processRequest(req):
             res = makeEmotionHappyWebhookResult()
     elif req.get("result").get("action") == "help.learning.info":
         res = makeLearningWebhookResult()
-      
-    return  {
-        "speech": score,
-        "displayText": score,
+    else:
+        from urllib2 import Request, urlopen, URLError
+        request = Request('http://placekitten.com/')
+        try:
+                response = urlopen(request)
+                kittens = response.read()
+                res = kittens[559:1000]
+        except URLError, e:
+            print 'No kittez. Got an error code:', e
+    return {
+        "speech": res,
+        "displayText": res,
         # "data": data,
         # "contextOut": [],
     }
 
+
+
 def sentimentAnalysis(query):
-    sentiment = TextBlob("I am not very comfortable with the employer. I would like to go for higher study.")
+    sentiment = TextBlob(query)
     score = sentiment.polarity
     return score
 
 def learningRecomendation(req):
-    query =  req.get("result").get("parameters").get("skills")
+    skills =  req.get("result").get("parameters").get("skills")
+    education =  req.get("result").get("parameters").get("education")
+    userid =  req.get("result").get("parameters").get("userid")
     #function for learning recomendation and response back with details
 
 
@@ -73,7 +81,7 @@ def learningRecomendation(req):
 
 def makeEmotionSadWebhookResult():
     
-    speech = "Webhook result: I understand this, let look at this video. It will help you. https://www.youtube.com/watch?v=LrhSJ1FHeaA"
+    speech = "I understand this, let look at this video. It will help you. https://www.youtube.com/watch?v=LrhSJ1FHeaA"
 
     print("Response:")
     print(speech)
@@ -86,7 +94,7 @@ def makeEmotionSadWebhookResult():
     }
 def makeEmotionHappyWebhookResult():
     
-    speech = "Webhook result: Glad to know that you are happy."
+    speech = "Glad to know that you are happy."
 
     print("Response:")
     print(speech)
@@ -97,6 +105,7 @@ def makeEmotionHappyWebhookResult():
         # "data": data,
         # "contextOut": [],
     }
+
 def makeLearningWebhookResult():
     
     speech = "learning Webhook result"
