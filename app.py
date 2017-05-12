@@ -53,7 +53,7 @@ def processRequest(req):
         request = Request('http://placekitten.com/')
         response = urlopen(request)
         kittens = response.read()
-        res = kittens[559:1000]  
+        res = kittens[559]  
     return {
         "speech": res,
         "displayText": res,
