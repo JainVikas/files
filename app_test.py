@@ -162,8 +162,8 @@ def makeLearningWebhookResult(userid):
     print(speech)
 
     return {
-        "speech": speech,
-        "displayText": speech,
+        "speech": userid,
+        "displayText": userid,
         # "data": data,
         # "contextOut": [],
     }
