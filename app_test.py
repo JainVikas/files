@@ -122,8 +122,13 @@ def learningRecomendation(userid):
 	topNISBNs = avgRating.sort_values(ascending=False).index[:N]
 	pd.Series(topNISBNs).apply(bookMeta)
 	speech = topN(204813,1)
-	return speech
-
+	return {
+            "speech": speech,
+            "displayText": speech,
+            # "data": data,
+            # "contextOut": [],
+            }
+    
 def makeEmotionSadWebhookResult():
     
     speech = "I understand this, let look at this video. It will help you. https://www.youtube.com/watch?v=LrhSJ1FHeaA"
@@ -152,8 +157,7 @@ def makeEmotionHappyWebhookResult():
     }
 
 def makeLearningWebhookResult(userid):
-    speech = "testing webhook"
-    #learningRecomendation(userid)
+    speech = learningRecomendation(userid)
     # print("Response:")
     # print(speech)
     return {
