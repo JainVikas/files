@@ -50,12 +50,12 @@ def processRequest(req):
         else:
             res = makeEmotionHappyWebhookResult()
     elif req.get("result").get("action") == "help.learning.info":
-        #skills = parameters.get("skills.original")
-        #education = parameters.get("education")
         userid = parameters.get("userid")
         if userid is not None:
-			res = makeLearningWebhookResult(userid)
-    return res
+            res = makeLearningWebhookResult(userid)
+    
+	
+	return res
 
 def sentimentAnalysis(query):
     sentiment = TextBlob(query)
