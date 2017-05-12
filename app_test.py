@@ -54,9 +54,13 @@ def processRequest(req):
         #education = parameters.get("education")
         userid = parameters.get("userid")
         #if skills is not None and education is not None and userid is not None:
-        res = makeLearningWebhookResult(userid)
-    return res
-
+        #res = makeLearningWebhookResult(userid)
+    return {
+        "speech": userid,
+        "displayText": userid,
+        # "data": data,
+        # "contextOut": [],
+    }
 
 def sentimentAnalysis(query):
     sentiment = TextBlob(query)
