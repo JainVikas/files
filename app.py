@@ -41,9 +41,9 @@ def processRequest(req):
     skills = 0
     education = 0
     userid = 0
+    result = req.get("result")
+    parameters = result.get("parameters")
     if req.get("result").get("action") == "help.emotion.info":
-        result = req.get("result")
-        parameters = result.get("parameters")
         query = parameters.get("any")
         score = sentimentAnalysis(query)
         if score < -0.3:
@@ -52,9 +52,9 @@ def processRequest(req):
             res = makeEmotionHappyWebhookResult()
     elif req.get("result").get("action") == "help.learning.info":
         if skills is None or education is None or userid is None :
-            skills =  req.get("result").get("parameters").get("skills")
-            education =  req.get("result").get("parameters").get("education")
-            userid =  req.get("result").get("parameters").get("userid")
+            skills = parameters.get("skills")
+            education = parameters.get("education")
+            userid = parameters.get("userid")
             #if skills is not None and education is not None and userid is not None :
            # res = makeLearningWebhookResult(skills, education, userid)
     return {
