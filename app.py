@@ -3,10 +3,10 @@
 from __future__ import print_function
 from future.standard_library import install_aliases
 install_aliases()
-from urllib3 import Request, urlopen, URLError
-from urllib.parse import urlparse, urlencode
-from urllib.request import urlopen, Request
-from urllib.error import HTTPError
+import urllib3
+from urllib3.parse import urlparse, urlencode
+from urllib3.request import urlopen, Request
+from urllib3.error import HTTPError
 
 import base64
 import json
