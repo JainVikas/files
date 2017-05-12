@@ -1,1 +1,1 @@
-web: python app_backup.py
+web: python app.py
