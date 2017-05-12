@@ -153,14 +153,15 @@ def makeEmotionHappyWebhookResult():
 
 def makeLearningWebhookResult(userid):
     
-   # speech = learningRecomendation(userid)
+   speech = "testing webhook"
+   #learningRecomendation(userid)
 
    # print("Response:")
    # print(speech)
 
     return {
-        "speech": userid,
-        "displayText": userid,
+        "speech": speech,
+        "displayText": speech,
         # "data": data,
         # "contextOut": [],
     }
