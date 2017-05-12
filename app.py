@@ -58,8 +58,8 @@ def processRequest(req):
             #if skills is not None and education is not None and userid is not None :
            # res = makeLearningWebhookResult(skills, education, userid)
     return {
-        "speech": skills,
-        "displayText": skills,
+        "speech": skills[0],
+        "displayText": skills[0],
         # "data": data,
         # "contextOut": [],
     }
