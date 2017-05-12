@@ -53,9 +53,7 @@ def processRequest(req):
         userid = parameters.get("userid")
         if userid is not None:
             res = makeLearningWebhookResult(userid)
-    
-	
-	return res
+    return res
 
 def sentimentAnalysis(query):
     sentiment = TextBlob(query)
