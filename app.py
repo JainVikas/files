@@ -52,11 +52,15 @@ def processRequest(req):
     elif req.get("result").get("action") == "help.learning.info":
         res = makeLearningWebhookResult()
       
-    return res
-
+    return  {
+        "speech": score,
+        "displayText": score,
+        # "data": data,
+        # "contextOut": [],
+    }
 
 def sentimentAnalysis(query):
-    sentiment = TextBlob(query)
+    sentiment = TextBlob("I am not very comfortable with the employer. I would like to go for higher study.")
     score = sentiment.polarity
     return score
 
