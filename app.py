@@ -6,6 +6,7 @@ install_aliases()
 from urllib.parse import urlparse, urlencode
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
+from urllib2 import Request, urlopen, URLError
 import base64
 import json
 import os
