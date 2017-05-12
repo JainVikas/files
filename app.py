@@ -38,6 +38,9 @@ def webhook():
 
 def processRequest(req):
     res = 0
+    skills = 0
+    education = 0
+    userid = 0
     if req.get("result").get("action") == "help.emotion.info":
         result = req.get("result")
         parameters = result.get("parameters")
