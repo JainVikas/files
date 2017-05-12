@@ -50,9 +50,9 @@ def processRequest(req):
         else:
             res = makeEmotionHappyWebhookResult()
     elif req.get("result").get("action") == "help.learning.info":
-        skills = parameters.get("skills.original")
-        education = parameters.get("education.original")
-        userid = parameters.get("userid.original")
+        #skills = parameters.get("skills.original")
+        #education = parameters.get("education")
+        userid = parameters.get("userid")
         #if skills is not None and education is not None and userid is not None:
            # res = makeLearningWebhookResult(skills, education, userid)
     return {
