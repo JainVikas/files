@@ -3,21 +3,24 @@
 from __future__ import print_function
 from future.standard_library import install_aliases
 install_aliases()
-
 from urllib.parse import urlparse, urlencode
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
-
+import base64
 import json
 import os
+from textblob import TextBlob
 
-from flask import Flask
+from flask import Flask, render_template
 from flask import request
 from flask import make_response
 
 # Flask app should start in global layout
 app = Flask(__name__)
 
+@app.route('/')
+def hello():
+    return render_template('index.htm')
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -25,23 +28,11 @@ def webhook():
 
     print("Request:")
     print(json.dumps(req, indent=4))
-    speech = "hello from heroku"
 
-    print("Response:")
-    print(speech)
-    print("hello from heroku")
-
-    res =  {
-        "speech": speech,
-        "displayText": speech,
-        # "data": data,
-        # "contextOut": [],
-        "source": "apiai-weather-webhook-sample"
-        }
-   # res = processRequest(req)
+    res = processRequest(req)
 
     res = json.dumps(res, indent=4)
-    print(res)
+    # print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
@@ -49,25 +40,24 @@ def webhook():
 
 def processRequest(req):
     res = 0
-    if req.get("result").get("action") != "help.emotion.info":
-        return{}
-    res = makeEmotionWebhookResult()
-   # elif req.get("result").get("action") == "help.learning.info":
-    # { score = learningRecomendation(req)
-     #   res = makeLearningWebhookResult()
-       #}
+    if req.get("result").get("action") == "help.emotion.info":
+        result = req.get("result")
+        parameters = result.get("parameters")
+        query = parameters.get("any")
+        score = sentimentAnalysis(query)
+        if score < -0.3:
+            res = makeEmotionSadWebhookResult()
+        else:
+            res = makeEmotionHappyWebhookResult()
+    elif req.get("result").get("action") == "help.learning.info":
+        res = makeLearningWebhookResult()
+      
     return res
 
 
-def sentimentAnalysis(req):
-    query =  req.get("result").get("resolvedQuery")
-    data = urllib.parse.urlencode({"text": query }).encode("utf-8")
-    req = urllib.request.Request("http://text-processing.com/api/sentiment/", data)
-    with urllib.request.urlopen(req) as response:
-        score = response.read()
-        obj = json.loads(the_page)
-        senti = obj.get("probability")
-        print(senti.get("pos")) 
+def sentimentAnalysis(query):
+    sentiment = TextBlob(query)
+    score = sentiment.polarity
     return score
 
 def learningRecomendation(req):
@@ -77,18 +67,32 @@ def learningRecomendation(req):
 
 
 
-def makeEmotionWebhookResult():
+def makeEmotionSadWebhookResult():
+    
     speech = "Webhook result: I understand this, let look at this video. It will help you. https://www.youtube.com/watch?v=LrhSJ1FHeaA"
+
     print("Response:")
     print(speech)
 
     return {
-        "speech": webhook,
-        "displayText": webhook,
+        "speech": speech,
+        "displayText": speech,
         # "data": data,
         # "contextOut": [],
-        "source": "apiai-weather-webhook-sample"
-        }
+    }
+def makeEmotionHappyWebhookResult():
+    
+    speech = "Webhook result: Glad to know that you are happy."
+
+    print("Response:")
+    print(speech)
+
+    return {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+    }
 def makeLearningWebhookResult():
     
     speech = "learning Webhook result"
@@ -101,8 +105,7 @@ def makeLearningWebhookResult():
         "displayText": speech,
         # "data": data,
         # "contextOut": [],
-        "source": "apiai-weather-webhook-sample"
-        }
+    }
 
 
 if __name__ == '__main__':
