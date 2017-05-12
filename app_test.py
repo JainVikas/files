@@ -54,7 +54,7 @@ def processRequest(req):
         #education = parameters.get("education")
         userid = parameters.get("userid")
         #if skills is not None and education is not None and userid is not None:
-           # res = makeLearningWebhookResult(skills, education, userid)
+        res = makeLearningWebhookResult(userid)
     return {
         "speech": userid,
         "displayText": userid,
@@ -103,14 +103,12 @@ def topN(user,N=3):
         return pd.Series(topNISBNs).apply(bookMeta)
 
 
-def learningRecomendation(skills, education, userid):
-	import pandas as pd
+def learningRecomendation(userid):
+	
 	dataFile='BX-Books-Ratings.csv'
 	data=pd.read_csv(dataFile,sep=";",header=0,names=["user","isbn","rating"], encoding='latin-1')
-
 	bookFile='BX-Books.csv'
 	books=pd.read_csv(bookFile,sep=";",header=0,error_bad_lines=False, usecols=[0,1,2],index_col=0,names=['isbn',"title","author"],encoding='latin-1')
-
 	data = data[data["isbn"].isin(books.index)]
 	usersPerISBN = data.isbn.value_counts()
 	ISBNsPerUser = data.user.value_counts()
@@ -161,9 +159,9 @@ def makeEmotionHappyWebhookResult():
         # "contextOut": [],
     }
 
-def makeLearningWebhookResult(skills, education, userid):
+def makeLearningWebhookResult(userid):
     
-    speech = learningRecomendation(skills, education, userid)
+    speech = learningRecomendation(userid)
 
     print("Response:")
     print(speech)
