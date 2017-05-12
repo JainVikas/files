@@ -97,9 +97,9 @@ def topN(user,N=3):
 
 def learningRecomendation(userid):
 	
-	"""dataFile='BX-Books-Ratings.csv'
-	data=pd.read_csv(dataFile,sep=";",header=0,names=["user","isbn","rating"], encoding='latin-1')
-	bookFile='BX-Books.csv'
+	dataFile='BX-Books-Ratings.csv'
+	data=pd.read_csv(dataFile,sep=";",header=0,names=["user","isbn","rating"])
+	"""bookFile='BX-Books.csv'
 	books=pd.read_csv(bookFile,sep=";",header=0,error_bad_lines=False, usecols=[0,1,2],index_col=0,names=['isbn',"title","author"],encoding='latin-1')
 	data = data[data["isbn"].isin(books.index)]
 	usersPerISBN = data.isbn.value_counts()
