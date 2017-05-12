@@ -51,10 +51,15 @@ def processRequest(req):
         skills =  req.get("result").get("parameters").get("skills")
         education =  req.get("result").get("parameters").get("education")
         userid =  req.get("result").get("parameters").get("userid")
-        if skills is not None and education is not None and userid is not None :
-            res = makeLearningWebhookResult(skills, education, userid)
+        #if skills is not None and education is not None and userid is not None :
+           # res = makeLearningWebhookResult(skills, education, userid)
     
-    return res
+    return {
+        "speech": skills,
+        "displayText": skills,
+        # "data": data,
+        # "contextOut": [],
+    }
 
 
 
@@ -96,7 +101,7 @@ def makeEmotionHappyWebhookResult():
 
 def makeLearningWebhookResult(skills, education, userid):
     
-    speech = skiils
+    speech = skills
     #learningRecomendation(skills, education, userid)
 
     print("Response:")
