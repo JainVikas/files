@@ -14,7 +14,6 @@ import base64
 import json
 import os
 from textblob import TextBlob
-import pandas as pd
 import warnings
 from flask import Flask, render_template
 from flask import request
@@ -120,8 +119,8 @@ def learningRecomendation(skills, education, userid):
 	KnearestUsers = nearestNeighbors(user)
 	NNRatings = userItemRatingMatrix[userItemRatingMatrix.index.isin(KnearestUsers)]
 	with warnings.catch_warnings():
-    warnings.simplefilter("ignore", category=RuntimeWarning)
-    avgRating = NNRatings.apply(np.nanmean).dropna()
+		warnings.simplefilter("ignore", category=RuntimeWarning)
+		avgRating = NNRatings.apply(np.nanmean).dropna()
 	booksAlreadyRead = userItemRatingMatrix.transpose()[user].dropna().index
 	booksAlreadyRead
 	avgRating = avgRating[~avgRating.index.isin(booksAlreadyRead)]
