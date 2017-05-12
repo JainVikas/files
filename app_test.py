@@ -98,7 +98,7 @@ def topN(user,N=3):
         topNISBNs = avgRating.sort_values(ascending=False).index[:N]
         return pd.Series(topNISBNs).apply(bookMeta)
 
-KnearestUsers = nearestNeighbors(user)
+
 def learningRecomendation(skills, education, userid):
 	import pandas as pd
 	dataFile='BX-Books-Ratings.csv'
