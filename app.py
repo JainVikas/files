@@ -38,9 +38,6 @@ def webhook():
 
 def processRequest(req):
     res = 0
-    skills = 0
-    education = 0
-    userid = 0
     result = req.get("result")
     parameters = result.get("parameters")
     if req.get("result").get("action") == "help.emotion.info":
@@ -58,8 +55,8 @@ def processRequest(req):
             #if skills is not None and education is not None and userid is not None :
            # res = makeLearningWebhookResult(skills, education, userid)
     return {
-        "speech": skills[0],
-        "displayText": skills[0],
+        "speech": skills,
+        "displayText": skills,
         # "data": data,
         # "contextOut": [],
     }
