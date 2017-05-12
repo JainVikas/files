@@ -99,7 +99,7 @@ def learningRecomendation(userid):
 	
 	dataFile='BX-Books-Ratings.csv'
 	data=pd.read_csv(dataFile,sep=";",header=0,names=["user","isbn","rating"], encoding='latin-1')
-	bookFile='BX-Books.csv'
+	"""bookFile='BX-Books.csv'
 	books=pd.read_csv(bookFile,sep=";",header=0,error_bad_lines=False, usecols=[0,1,2],index_col=0,names=['isbn',"title","author"],encoding='latin-1')
 	data = data[data["isbn"].isin(books.index)]
 	usersPerISBN = data.isbn.value_counts()
@@ -121,7 +121,7 @@ def learningRecomendation(userid):
 	N=3
 	topNISBNs = avgRating.sort_values(ascending=False).index[:N]
 	pd.Series(topNISBNs).apply(bookMeta)
-	speech = topN(204813,1)
+	speech = topN(204813,1)"""
 	return userid
     
 def makeEmotionSadWebhookResult():
