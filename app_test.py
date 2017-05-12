@@ -122,7 +122,7 @@ def learningRecomendation(userid):
 	topNISBNs = avgRating.sort_values(ascending=False).index[:N]
 	pd.Series(topNISBNs).apply(bookMeta)
 	speech = topN(204813,1)
-	return "this is testing webhook"
+	return userid
     
 def makeEmotionSadWebhookResult():
     
