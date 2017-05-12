@@ -4,9 +4,9 @@ from __future__ import print_function
 from future.standard_library import install_aliases
 install_aliases()
 import urllib3
-from urllib3.parse import urlparse, urlencode
-from urllib3.request import urlopen, Request
-from urllib3.error import HTTPError
+from urllib.parse import urlparse, urlencode
+from urllib.request import urlopen, Request
+from urllib.error import HTTPError
 
 import base64
 import json
@@ -50,7 +50,6 @@ def processRequest(req):
     elif req.get("result").get("action") == "help.learning.info":
         res = makeLearningWebhookResult()
     else:
-        from urllib2 import Request, urlopen, URLError
         request = Request('http://placekitten.com/')
         response = urlopen(request)
         kittens = response.read()
